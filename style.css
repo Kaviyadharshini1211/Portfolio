@@ -1,0 +1,510 @@
+/* style.css */
+
+/* ================================
+   VARIABLES & RESET
+   ================================ */
+   :root {
+    --clr-bg: #121212;
+    --clr-surface: #1f1f1f;
+    --clr-text: #e0e0e0;
+    --clr-primary: #b800ff;   /* neon purple */
+    --clr-accent: #8a2be2;
+    --transition: 0.3s ease;
+    --ff-base: 'Segoe UI', sans-serif;
+  }
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+  body {
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    font-family: var(--ff-base);
+    line-height: 1.6;
+  }
+  
+  /* ================================
+     GLASSMORPHIC STICKY NAVBAR
+     ================================ */
+  .navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  .navbar nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 1rem 0;
+  }
+  
+  /* — Improved Hover Effect on Nav Links — */
+  /* 1. Make each link a positioned container */
+  /* — New Nav‑link Hover: Sliding Highlight + Pop — */
+.navbar nav a {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    color: var(--clr-text);
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      color var(--transition),
+      transform var(--transition);
+  }
+  
+  .navbar nav a::before {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 100%;
+    background: var(--clr-accent);
+    transform: translateX(-100%);
+    transition: transform var(--transition);
+    z-index: -1;
+  }
+  
+  .navbar nav a:hover {
+    color: white;            /* invert text to dark on the bright accent */
+    transform: scale(1.05);          /* slight “pop” */
+  }
+  
+  .navbar nav a:hover::before {
+    transform: translateX(0);        /* slide the colored block fully in */
+  }
+  
+  
+  /* ================================
+     HERO (Below Navbar)
+     ================================ */
+  .hero {
+    background: var(--clr-surface);
+    text-align: center;
+    padding: 2.5rem 1rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    color: var(--clr-primary);
+    /* Minimal 1px purple glow */
+    text-shadow: 0 0 1px var(--clr-primary);
+    margin: 0;
+  }
+  
+  /* ================================
+     SECTIONS
+     ================================ */
+  section {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  section:nth-child(even) {
+    background: var(--clr-surface);
+  }
+  section:nth-child(odd) {
+    background: var(--clr-bg);
+  }
+  h2 {
+    color: var(--clr-primary);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    position: relative;
+  }
+  h2::after {
+    content: '';
+    width: 50px;
+    height: 4px;
+    background: var(--clr-accent);
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    border-radius: 2px;
+  }
+  
+  /* ================================
+     SKILLS GRID
+     ================================ */
+  #skills ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 1rem;
+  }
+  #skills li {
+    background: var(--clr-surface);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  }
+
+  #skills h3 {
+    margin-top: 0.5rem;
+    color: var(--clr-primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  /* ================================
+   SKILLS GRID FOR LANGUAGES
+   ================================ */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .skill-box {
+    background: var(--clr-surface);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .skill-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+  }
+  
+  .skill-box span {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--clr-text); /* White text */
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  /* Progress bar container */
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  /* Progress bar fill */
+  .progress-fill {
+    height: 100%;
+    background: var(--clr-primary); /* Neon purple fill */
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+  
+  
+  /* ================================
+     PROJECT CARDS
+     ================================ */
+     #projects {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+      
+      /* Each project box */
+      .project {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        background: var(--clr-surface);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+        transition: box-shadow 0.4s ease, transform 0.4s ease;
+      }
+      
+      /* Content on left, Image on right */
+      .project-content {
+        flex: 1;
+      }
+      
+      /* Image style */
+      .project-image {
+        flex: 1;
+      }
+      
+      .project-image img {
+        width: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+        max-height: 300px;
+      }
+      
+      /* Zigzag effect: alternate projects */
+      .project.reverse {
+        flex-direction: row-reverse;
+      }
+      
+      /* Hover effect */
+      .project:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 0 15px var(--clr-primary), 0 0 25px var(--clr-primary);
+      }
+      
+
+        /* ================================
+     CERTIFICATES
+     ================================ */
+
+     .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 per row */
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      
+      .certificate-card {
+        background: var(--clr-surface);
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .certificate-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        object-fit: cover;
+      }
+      
+      .certificate-card p {
+        margin-top: 1rem;
+        color: var(--clr-text);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      
+      /* Hover effect */
+      .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px var(--clr-primary);
+      }
+    
+      
+      
+     /* ================================
+     EXPERIENCE
+     ================================ */
+
+     .experience-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      
+      .experience-card {
+        background: var(--clr-surface);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .experience-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px var(--clr-primary);
+      }
+      
+      .experience-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      
+      .experience-header h3 {
+        color: var(--clr-primary);
+        font-size: 1.5rem;
+      }
+      
+      .experience-header span {
+        font-size: 1rem;
+        color: #aaa;
+      }
+      
+      .experience-card p, 
+      .experience-card ul {
+        margin-bottom: 1rem;
+      }
+      
+      .experience-card ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+      }
+      
+      .experience-card ul li {
+        margin-bottom: 0.5rem;
+      }
+      
+
+       /* ================================
+     ACHIEVEMENTS
+     ================================ */
+
+     .achievements-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      
+      .achievement-card {
+        background: var(--clr-surface);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .achievement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 15px var(--clr-accent);
+      }
+      
+      .achievement-card h3 {
+        color: var(--clr-primary);
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .achievement-card p {
+        margin-bottom: 0.5rem;
+        color: var(--clr-text);
+      }
+      
+  
+  /* ================================
+     BUTTONS
+     ================================ */
+
+
+   
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background: var(--clr-primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background var(--transition);
+  }
+  .btn:hover {
+    background: var(--clr-accent);
+  }
+
+ /* ================================
+     CONTACT
+     ================================ */
+/* Style for contact icons */
+.contact-icon {
+    color: var(--clr-text);
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Hover effect for icons */
+  .contact-icon:hover {
+    color: var(--clr-primary);
+    transform: scale(1.1);
+  }
+  
+  .contact-icon i {
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Add a margin between each contact icon */
+  #contact p {
+    margin-bottom: 1rem;
+  }
+  
+  
+  /* ================================
+     FOOTER
+     ================================ */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--clr-surface);
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+
+  .resume-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .resume-download {
+    margin-top: 20px;
+  }
+  
+  .btn-download {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--clr-primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-download:hover {
+    background: var(--clr-accent);
+  }
+  
+  
+  
+  
+  /* ================================
+   FADE-IN SCROLL ANIMATIONS
+   ================================ */
+
+   /* Fade-in animation for sections */
+/* Default state for sections and footer (hidden initially) */
+.project-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.project-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+  
